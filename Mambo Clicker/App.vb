@@ -57,7 +57,7 @@ Public Class App
         lblTurn.BorderStyle = BorderStyle.None
 
 
-        ' PictureBox setup
+        ' PictureBox setup done
         Mambo.SizeMode = PictureBoxSizeMode.Zoom
         layout.SizeMode = PictureBoxSizeMode.Zoom
         layout.Parent = Mambo
