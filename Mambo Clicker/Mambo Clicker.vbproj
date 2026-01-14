@@ -127,6 +127,9 @@
     <Content Include="Sources\mambo.gif" />
     <Content Include="Sources\Mambo.mp3" />
     <Content Include="Sources\Mambo.wav" />
+    <Content Include="SRC\Mambo.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
