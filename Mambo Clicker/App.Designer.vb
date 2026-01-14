@@ -25,7 +25,7 @@ Partial Class App
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(App))
         Me.Mambo = New System.Windows.Forms.PictureBox()
         Me.credit1 = New System.Windows.Forms.LinkLabel()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.credit2 = New System.Windows.Forms.Label()
         Me.layout = New System.Windows.Forms.PictureBox()
         Me.lblGoal = New System.Windows.Forms.RichTextBox()
         Me.Stat1 = New System.Windows.Forms.RichTextBox()
@@ -65,15 +65,15 @@ Partial Class App
         Me.credit1.TabStop = True
         Me.credit1.Text = "Fan-made parody game by HungNQ2005 (non-commercial)"
         '
-        'Label1
+        'credit2
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.BackColor = System.Drawing.Color.Transparent
-        Me.Label1.Location = New System.Drawing.Point(457, 476)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(175, 13)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "All original rights belong to Cygames"
+        Me.credit2.AutoSize = True
+        Me.credit2.BackColor = System.Drawing.Color.Transparent
+        Me.credit2.Location = New System.Drawing.Point(457, 476)
+        Me.credit2.Name = "credit2"
+        Me.credit2.Size = New System.Drawing.Size(175, 13)
+        Me.credit2.TabIndex = 4
+        Me.credit2.Text = "All original rights belong to Cygames"
         '
         'layout
         '
@@ -173,7 +173,7 @@ Partial Class App
         '
         'lblTurn
         '
-        Me.lblTurn.Cursor = System.Windows.Forms.Cursors.No
+        Me.lblTurn.Cursor = System.Windows.Forms.Cursors.WaitCursor
         Me.lblTurn.Font = New System.Drawing.Font("Segoe UI", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTurn.ForeColor = System.Drawing.Color.Gold
         Me.lblTurn.Location = New System.Drawing.Point(140, 47)
@@ -183,6 +183,7 @@ Partial Class App
         Me.lblTurn.Size = New System.Drawing.Size(36, 18)
         Me.lblTurn.TabIndex = 13
         Me.lblTurn.Text = ""
+        Me.lblTurn.UseWaitCursor = True
         '
         'App
         '
@@ -201,7 +202,7 @@ Partial Class App
         Me.Controls.Add(Me.Stat1)
         Me.Controls.Add(Me.lblGoal)
         Me.Controls.Add(Me.layout)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.credit2)
         Me.Controls.Add(Me.credit1)
         Me.Controls.Add(Me.Mambo)
         Me.DoubleBuffered = True
@@ -218,7 +219,7 @@ Partial Class App
 
     Friend WithEvents Mambo As PictureBox
     Friend WithEvents credit1 As LinkLabel
-    Friend WithEvents Label1 As Label
+    Friend WithEvents credit2 As Label
     Friend WithEvents layout As PictureBox
     Friend WithEvents lblGoal As RichTextBox
     Friend WithEvents Stat1 As RichTextBox

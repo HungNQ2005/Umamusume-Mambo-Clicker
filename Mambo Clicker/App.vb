@@ -1,5 +1,7 @@
 ﻿Imports System.Media
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports WMPLib
+
 
 Public Class App
 
@@ -24,6 +26,7 @@ Public Class App
     Private score As Integer = 0
     Private mamboSound As SoundPlayer
     Private lastClick As DateTime
+    Private bgmPlayer As WindowsMediaPlayer
 
     ' ========================
     ' POP EFFECT DATA
@@ -32,6 +35,10 @@ Public Class App
     Private originalLocation As Point
     Private popTimer As Timer
     Private isPopped As Boolean = False
+    Private layoutOriginalSize As Size
+    Private layoutOriginalLocation As Point
+    Private statBoxes As RichTextBox()
+
 
     ' ========================
     ' FORM LOAD.
@@ -58,17 +65,19 @@ Public Class App
         layout.Location = New Point(20, 10)
         layout.BringToFront()
 
-
-
+        layoutOriginalSize = layout.Size
+        layoutOriginalLocation = layout.Location
 
         ' Score
         lblGoal.Text = "Goal: Touch Mambo"
-        lblGoal.Text = "1"
+        lblTurn.Text = "1"
         Stat1.Text = "0"
         Stat2.Text = "0"
         Stat3.Text = "0"
         Stat4.Text = "0"
         Stat5.Text = "0"
+
+        statBoxes = {Stat1, Stat2, Stat3, Stat4, Stat5, Stat6, lblGoal, lblTurn}
 
         ' Save original size & position
         originalSize = Mambo.Size
@@ -80,6 +89,13 @@ Public Class App
         AddHandler popTimer.Tick, AddressOf PopBack
 
         ' Init sound 
+        bgmPlayer = New WindowsMediaPlayer()
+        bgmPlayer.URL = IO.Path.Combine(Application.StartupPath, "SRC\videoplayback.mp3")
+        bgmPlayer.settings.setMode("loop", True)
+        bgmPlayer.settings.volume = 40
+        bgmPlayer.controls.play()
+
+
         Dim soundPath As String =
             IO.Path.Combine(Application.StartupPath, "SRC\Mambo.wav")
 
@@ -91,7 +107,12 @@ Public Class App
 
         mamboSound = New SoundPlayer(soundPath)
         mamboSound.Load()
+        For Each tb In statBoxes
+            tb.ReadOnly = True
+            tb.TabStop = False
 
+        Next
+        Me.ActiveControl = Nothing
     End Sub
 
     ' ========================
@@ -108,6 +129,9 @@ Public Class App
 
         If isPopped Then Exit Sub
         isPopped = True
+        For Each tb In statBoxes
+            tb.Visible = False
+        Next
 
         Dim scale As Double = 1.15 ' pop size
 
@@ -123,6 +147,20 @@ Public Class App
 
         popTimer.Start()
 
+
+        Dim invScale As Double = 1 / scale
+
+        layout.Size = New Size(
+            CInt(layoutOriginalSize.Width * invScale),
+            CInt(layoutOriginalSize.Height * invScale)
+        )
+
+
+        layout.Location = New Point(
+        layoutOriginalLocation.X + (layoutOriginalSize.Width - layout.Width) \ 2,
+        layoutOriginalLocation.Y + (layoutOriginalSize.Height - layout.Height) \ 2
+        )
+
     End Sub
 
     Private Sub PopBack(sender As Object, e As EventArgs)
@@ -130,7 +168,11 @@ Public Class App
 
         Mambo.Size = originalSize
         Mambo.Location = originalLocation
-
+        layout.Size = layoutOriginalSize
+        layout.Location = layoutOriginalLocation
+        For Each tb In statBoxes
+            tb.Visible = True
+        Next
         isPopped = False
     End Sub
 
