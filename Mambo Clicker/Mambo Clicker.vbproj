@@ -135,7 +135,19 @@
     <Content Include="Sources\mambo.gif" />
     <Content Include="Sources\Mambo.mp3" />
     <Content Include="Sources\Mambo.wav" />
-    <Content Include="SRC\Mambo.wav">
+    <Content Include="SRC\Mambo4.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SRC\Mambo3.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SRC\Mambo2.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SRC\MamboUh.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SRC\Mambo1.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="SRC\videoplayback.mp3">

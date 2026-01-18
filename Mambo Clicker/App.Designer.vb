@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class App
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class App
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(App))
         Me.Mambo = New System.Windows.Forms.PictureBox()
@@ -35,8 +35,10 @@ Partial Class App
         Me.Stat5 = New System.Windows.Forms.RichTextBox()
         Me.Stat6 = New System.Windows.Forms.RichTextBox()
         Me.lblTurn = New System.Windows.Forms.RichTextBox()
+        Me.btn15 = New System.Windows.Forms.PictureBox()
         CType(Me.Mambo, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.layout, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btn15, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Mambo
@@ -185,6 +187,15 @@ Partial Class App
         Me.lblTurn.Text = ""
         Me.lblTurn.UseWaitCursor = True
         '
+        'btn15
+        '
+        Me.btn15.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btn15.Location = New System.Drawing.Point(633, 402)
+        Me.btn15.Name = "btn15"
+        Me.btn15.Size = New System.Drawing.Size(119, 34)
+        Me.btn15.TabIndex = 15
+        Me.btn15.TabStop = False
+        '
         'App
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -193,6 +204,7 @@ Partial Class App
         Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
         Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.ClientSize = New System.Drawing.Size(886, 501)
+        Me.Controls.Add(Me.btn15)
         Me.Controls.Add(Me.lblTurn)
         Me.Controls.Add(Me.Stat6)
         Me.Controls.Add(Me.Stat5)
@@ -212,6 +224,7 @@ Partial Class App
         Me.Text = "Umamusume: Mambo Clicker"
         CType(Me.Mambo, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.layout, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btn15, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -229,4 +242,5 @@ Partial Class App
     Friend WithEvents Stat5 As RichTextBox
     Friend WithEvents Stat6 As RichTextBox
     Friend WithEvents lblTurn As RichTextBox
+    Friend WithEvents btn15 As PictureBox
 End Class

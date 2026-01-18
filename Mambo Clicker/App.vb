@@ -1,5 +1,6 @@
 ﻿Imports System.Media
 Imports System.Windows.Forms.VisualStyles.VisualStyleElement
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar
 Imports WMPLib
 
 
@@ -18,15 +19,19 @@ Public Class App
     '
     ' Non-commercial use only.
     ' =========================================================
-
+    ' Patch 1.1.0
 
     ' ========================
     ' GAME DATA
     ' ========================
     Private score As Integer = 0
     Private mamboSound As SoundPlayer
+    Private mamboExit As SoundPlayer
     Private lastClick As DateTime
     Private bgmPlayer As WindowsMediaPlayer
+    Private mamboSounds As List(Of SoundPlayer)
+    Private rnd As New Random()
+
 
     ' ========================
     ' POP EFFECT DATA
@@ -95,24 +100,53 @@ Public Class App
         bgmPlayer.settings.volume = 40
         bgmPlayer.controls.play()
 
+        mamboSounds = New List(Of SoundPlayer)
 
-        Dim soundPath As String =
-            IO.Path.Combine(Application.StartupPath, "SRC\Mambo.wav")
+        Dim mamboFiles = {
+                "SRC\Mambo1.wav",
+                "SRC\Mambo1.wav",
+                "SRC\Mambo1.wav",
+                "SRC\Mambo2.wav",
+                "SRC\Mambo3.wav",
+                "SRC\Mambo4.wav"
+                }
 
-        If Not IO.File.Exists(soundPath) Then
-            MessageBox.Show("Không tìm thấy file:" & vbCrLf & soundPath,
-                            "Sound Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            Return
-        End If
+        For Each file In mamboFiles
+            Dim path = IO.Path.Combine(Application.StartupPath, file)
 
-        mamboSound = New SoundPlayer(soundPath)
-        mamboSound.Load()
+            If IO.File.Exists(path) Then
+                Dim sp As New SoundPlayer(path)
+                sp.Load()
+                mamboSounds.Add(sp)
+            End If
+        Next
+
+
+
+        Dim soundPathExit As String =
+            IO.Path.Combine(Application.StartupPath, "SRC\MamboUh.wav")
+
+
+
+
+
+
+
+        mamboExit = New SoundPlayer(soundPathExit)
+        mamboExit.Load()
         For Each tb In statBoxes
             tb.ReadOnly = True
             tb.TabStop = False
 
         Next
         Me.ActiveControl = Nothing
+
+        btn15.BackColor = Color.Transparent
+        btn15.ForeColor = Color.Transparent
+        btn15.Text = ""
+        btn15.BringToFront()
+
+
     End Sub
 
     ' ========================
@@ -133,7 +167,7 @@ Public Class App
             tb.Visible = False
         Next
 
-        Dim scale As Double = 1.15 ' pop size
+        Dim scale As Double = 1.07 ' pop size
 
         Dim newW As Integer = CInt(originalSize.Width * scale)
         Dim newH As Integer = CInt(originalSize.Height * scale)
@@ -201,8 +235,16 @@ Public Class App
         PopMambo()
 
         ' Play sound
-        mamboSound.Stop()
-        mamboSound.Play()
+        'mamboSound.Stop()
+        'mamboSound.Play()
+        If mamboSounds.Count > 0 Then
+            Dim index = rnd.Next(mamboSounds.Count)
+            mamboSounds(index).Stop()
+            mamboSounds(index).Play()
+            Debug.WriteLine("Sound index = " & index)
+            Debug.WriteLine("Total sounds = " & mamboSounds.Count)
+
+        End If
 
         ' You will never reach the goal hahaha
         score += 1
@@ -214,5 +256,10 @@ Public Class App
         Stat5.Text = score.ToString()
         Stat6.Text = score.ToString()
         lblTurn.Text = 2 + score.ToString()
+    End Sub
+
+    Private Sub btn15_Click(sender As Object, e As EventArgs) Handles btn15.Click
+        mamboExit.Stop()
+        mamboExit.Play()
     End Sub
 End Class
